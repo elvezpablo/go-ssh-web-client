@@ -71,7 +71,9 @@ func main() {
 		}
 	}
 
-	http.Handle("/", http.FileServer(http.Dir("./front/")))
+	// http.Handle("/", http.FileServer(http.Dir("./front/")))
+	// points to vite build
+	http.Handle("/", http.FileServer(http.Dir("./www/dist/")))
 	http.HandleFunc("/web-socket/ssh", handler.webSocket)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

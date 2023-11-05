@@ -237,6 +237,8 @@ type sshHandler struct {
 // webSocket handles WebSocket requests for SSH from the clients.
 func (h *sshHandler) webSocket(w http.ResponseWriter, req *http.Request) {
 	conn, err := upgrader.Upgrade(w, req, nil)
+	// this allows vite to connect to this service
+	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
 	if err != nil {
 		log.Println("upgrader.Upgrade:", err)
 		return
